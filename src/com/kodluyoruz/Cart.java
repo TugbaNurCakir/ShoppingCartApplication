@@ -21,6 +21,7 @@ public class Cart {
      */
     public List<Product> getProducts(){
         // code here
+        return products;
     }
 
     /**
@@ -29,6 +30,7 @@ public class Cart {
      */
     public void addProduct(Product product) {
         // code here
+        this.products.add(product);
     }
 
     /**
@@ -37,6 +39,7 @@ public class Cart {
      */
     public void addProducts(List<Product> products) {
          // code here
+        this.products.addAll(products);
     }
 
     /**
@@ -46,6 +49,9 @@ public class Cart {
      */
     public void addProduct(Product product, int howManyTimes) {
         // code here
+        for(int i =0; i<howManyTimes; i++){
+            this.products.add(product);
+        }
     }
 
     /**
@@ -54,6 +60,11 @@ public class Cart {
      */
     public double totalPrice(){
         // code here
+        double totalPrice=0;
+        for (Product item: this.products) {
+            totalPrice+=item.getPrice(this);
+        }
+        return totalPrice;
     }
 
     /**

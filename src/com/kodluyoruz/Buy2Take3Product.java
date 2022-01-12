@@ -21,6 +21,13 @@ public class Buy2Take3Product extends Product {
         // if the price can not be reduced you should print a message and
         // terminate the program. Use IllegalArgumentException to terminate.
         // code here
+        super(original);
+        if (!original.canBeReduced()){
+            throw new IllegalArgumentException("Can't Buy 2 Take 3");
+        }
+        else{
+            this.original=original;
+        }
     }
 
     /**
@@ -31,6 +38,10 @@ public class Buy2Take3Product extends Product {
     public boolean canBeReduced() {
         // You can not discount the price of Buy2Take3 product
         // code here
+        if(original instanceof DiscountedProduct){
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -43,5 +54,22 @@ public class Buy2Take3Product extends Product {
         // calculate unit price of this product purchased
         // as Buy2Take3
         // code here
+        int count = 0;
+        double price = 0;
+        for (Product item : cart.getProducts()
+        ) {
+            if (item instanceof Buy2Take3Product) { //Check if item buy2take3product
+                count++;                           //increase product count
+                price += item.getPrice();
+            }
+        }
+//Apply the campaign if there are more than 3 products
+        if (count >= 3){
+            double discount = count / 3;
+            discount = discount * (price / count);
+            price -= discount;
+            price /= count;
+        }
+        return price;
     }
 }

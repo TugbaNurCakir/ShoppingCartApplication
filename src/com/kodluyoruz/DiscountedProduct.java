@@ -20,6 +20,16 @@ public class DiscountedProduct extends Product {
         // if the price can not be reduced you should print a message and
         // terminate the program. Use IllegalArgumentException to terminate.
         // code here
+
+        super(original);
+        if(!original.canBeReduced()){
+            throw new IllegalArgumentException("Can't discount");
+        }
+        else{
+            this.original=original;
+            this.discount=discount;
+        }
+
     }
 
     /**
@@ -29,6 +39,10 @@ public class DiscountedProduct extends Product {
      */
     public double getPrice(Cart cart) {
         // code here
+        double price = 0;
+        price = original.getPrice(cart)-this.original.getPrice(cart)*(this.discount/100.0);
+
+        return price;
     }
 
     /**
@@ -37,5 +51,6 @@ public class DiscountedProduct extends Product {
      */
     public String toString() {
         // code here
+        return this.original.getName()+" [discounted by %"+discount+"]";
     }
 }
